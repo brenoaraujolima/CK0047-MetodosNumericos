@@ -1,3 +1,4 @@
+#include<cmath>
 using namespace std;
 
 class MetodoBissecao{
@@ -14,9 +15,6 @@ class MetodoBissecao{
         void setA(float interc);//atribuir valo para a inicio do intervalo
         void setB(float interf);//atribuir valor para o fim do intervalo
         void setErro(float erro);//atribuir valor para o erro minimo do calculo
-
-}
-
 
 void MetodoBissecao::setA(float interc){
     this->A = interc;
@@ -74,4 +72,5 @@ float MetodoBissecao::Bissecao(float ajuste, int nd, int kmax, int aot){
     }while(abs(Fd) > E && intervX > E && k <= kmax);
     return d;
     
+    }
 }
