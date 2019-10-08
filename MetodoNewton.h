@@ -22,19 +22,19 @@ class MetodoNewton {
         float getB();
         float getE();
         bool testeSinal(float a, float b);
-        float f(float x);
+        float f2(float x);
         float derivadaF(float d); //calcula derivada da funcao no ponto x.
 
 };
 
 //Metodo construtor de calibraçao do sistema
-    MetodoNewton::MetodoNewton(float a, float E) {
-        this->a = a;
-        this->E = E;
-        this->nd = 6;
-        this->A = 2;
-        this->B = 3;
-    }
+MetodoNewton::MetodoNewton(float a, float E) {
+    this->a = a;
+    this->E = E;
+    this->nd = 6;
+    this->A = 7;
+    this->B = 8;
+}
 
 //atribuir valor para o inicio do intervalo
 void MetodoNewton::setA(float interc) {
@@ -65,13 +65,13 @@ float MetodoNewton::AoT(float x, float nd, bool escolha) {
     else                    return trunc(nd*x)/nd;
 }
 
-float MetodoNewton::f(float d) {
-    return getA()*d - d*log(d);
+float MetodoNewton::f2(float d) {
+    return this->a*d - d*log(d);
 }
 
 //Teste de convergencia da funcao.
 bool MetodoNewton::testeSinal(float a, float b) {
-    if((this->f(a) * this->f(b)) > 0) {
+    if((this->f2(a) * this->f2(b)) > 0) {
         return false;
     }
     else {
@@ -81,31 +81,31 @@ bool MetodoNewton::testeSinal(float a, float b) {
 
 //calcula derivada da função dada pelo professor no ponto x.
 float MetodoNewton::derivadaF(float d) {
-    return getA()-log(d)-1;
+    return this->a-log(d)-1;
 }
 
 //parametro foguete, numero de casas decimais, maximo de iteracoes, escolha de arrend. ou trunc.
 float MetodoNewton::newton(float a, int nd, int kmax, bool escolha) {
     int iter = 0; //iteração corrente.
-    float xAtual, xAnterior; //Variaveis que receberao o isolamento inicial.
-    float inicio = this->AoT(getA(),nd,escolha);
-    float final = this->AoT(getB(),nd,escolha);
+    float xAnterior = this->AoT(A,nd,escolha);
+    float xAtual = this->AoT(B,nd,escolha);
 
-    if(testeSinal(inicio,final) == false) {
-        cout << "O Intervalo ["<<inicio<<","<<final<<"] não converge"<< endl;
+    if(testeSinal(f2(xAnterior),f2(xAtual)) == false) {
+        cout << "O Intervalo ["<<xAnterior<<","<<xAtual<<"] não converge"<< endl;
     }
 
-    xAnterior = (inicio + final)/2;
+    xAnterior = (xAnterior + xAtual)/2;
 
-    if(abs(f(xAnterior)) < this->E) {
+    if(abs(f2(xAnterior))<this->E) {
         return xAnterior;
     }
 
     while(iter<=kmax) {
-        xAtual = xAnterior - (f(xAnterior)/derivadaF(xAnterior));
-        if(f(xAtual) < this->E || abs(xAtual - xAnterior) < this->E) {
+        xAtual = xAnterior - (f2(xAnterior)/derivadaF(xAnterior));
+        if(abs(f2(xAtual))<this->E || abs(xAtual - xAnterior)<this->E) {
             return xAtual;
         }
+        xAnterior = xAtual;
         iter++;
     }
     return xAtual;
