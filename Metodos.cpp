@@ -7,16 +7,16 @@ using namespace std;
 void Metodos::setA(float interc){
     A = interc;
 }
+float Metodos::getA(){return A;}
 
 void Metodos::setB(float interf){
     B = interf;
 }
+float Metodos::getB(){return B;}
 
-void Metodos::setErro(float erro){
-    E = erro;
+void Metodos::setErro(float e){
+    E = e;
 }
-
-
 //retorna numero truncado ou arredondado
 float Metodos::AoT(float x, float nd, bool escolha) {
     if(escolha == true)     return round(pow(10,nd)*x)/pow(10,nd);
@@ -70,18 +70,26 @@ float Metodos::Bissecao(float ajuste, int nd, int kmax, bool escolha){
             FB1 = Fd;
         }
         intervX = abs(A1-B1);
-        datametodos[0].erro[k] = AoT(intervX, nd, escolha);
+        datametodos[0].erros[k] = AoT(intervX, nd, escolha);
         datametodos[0].deslocamento[k] = AoT(d, nd, escolha);
         k++;
     } while(abs(Fd) > E && intervX > E && k <= kmax);
     if(intervX > abs(Fd)){
-        datametodos[0].erro[k] = AoT(abs(Fd), nd, escolha);
+        datametodos[0].erros[k] = AoT(abs(Fd), nd, escolha);
     }else{
-        datametodos[0].erro[k] = AoT(intervX, nd, escolha);
+        datametodos[0].erros[k] = AoT(intervX, nd, escolha);
     }
     
     datametodos[0].deslocamento[k] = AoT(d, nd, escolha);
     datametodos[0].iter = k;
+    datametodos[0].erro = datametodos[0].erros[k];
+    if(k==kmax){
+        datametodos[0].converge = false;
+    }else{
+        datametodos[0].raiz = AoT(d, nd, escolha);
+        datametodos[0].converge = true;
+    }
+
     return d;
 }
 
@@ -99,7 +107,7 @@ float Metodos::newton(float a, int nd, int kmax, bool escolha) {
     if(abs(f(xAnterior, a))<E) {
         return xAnterior;
         datametodos[1].deslocamento[iter] = AoT(xAnterior, nd, escolha);
-        datametodos[1].erro[iter] = AoT(abs(f(xAnterior, a)), nd, escolha);
+        datametodos[1].erros[iter] = AoT(abs(f(xAnterior, a)), nd, escolha);
     }
 
     while(iter<=kmax) {
@@ -107,15 +115,15 @@ float Metodos::newton(float a, int nd, int kmax, bool escolha) {
         if(abs(f(xAtual, a))<E || abs(xAtual - xAnterior)<E) {
             return xAtual;
             datametodos[1].deslocamento[iter] = AoT(xAtual, nd, escolha);
-            datametodos[1].erro[iter] = AoT(min(abs(f(xAtual, a)), abs(xAtual - xAnterior)), nd, escolha);
+            datametodos[1].erros[iter] = AoT(min(abs(f(xAtual, a)), abs(xAtual - xAnterior)), nd, escolha);
             datametodos[1].iter = iter;
         }
         datametodos[1].deslocamento[iter] = AoT(xAtual, nd, escolha);
-        datametodos[1].erro[iter] = AoT(min(abs(f(xAtual, a)), abs(xAtual - xAnterior)), nd, escolha);
+        datametodos[1].erros[iter] = AoT(min(abs(f(xAtual, a)), abs(xAtual - xAnterior)), nd, escolha);
         xAnterior = xAtual;
         iter++;
     }
-    cout << "nao convergiu apos "<<iter<<" iteracoes"<< endl;
+    cout << "nao convergiu apos "<<iter-1<<" iteracoes"<< endl;
     return xAtual;
 }
 

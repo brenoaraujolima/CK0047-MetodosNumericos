@@ -15,11 +15,15 @@ private:
     float AoT(float x, float nd, bool escolha);//retorna numero truncado ou arredondado
     float f(float d, float a);//metodo da funcao que o professor deu
 public:
+    float ajuste;
     struct dataMetodos{
         std::string nome;
-        float * erro;
+        float * erros;
         float * deslocamento;
+        float erro;
+        float raiz;
         int iter;
+        bool converge;
     };
     vector<dataMetodos> datametodos;
     
@@ -42,8 +46,10 @@ public:
     bool testeSinal(float a, float b, float ajuste);
     float derivadaF(float d, float a);
     void setA(float interc);//atribuir valo para a inicio do intervalo
+    float getA();
     void setB(float interf);//atribuir valor para o fim do intervalo
-    void setErro(float erro);//atribuir valor para o erro minimo do calculo
+    float getB();
+    void setErro(float e);
  };
  
 #endif

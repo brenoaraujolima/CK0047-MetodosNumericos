@@ -28,37 +28,32 @@ int main()
         metodos.setA(1.0f); // hardcoded inicio do intervalo (testes)
         metodos.setB(5.0f); // hardcoded fim do intervalo (teste)
         metodos.setErro(E); // Setando o erro permitido
+        metodos.ajuste = a; // Setando o ajuste
         metodos.newton(a, casasdecimais, iteracoes, AoT); // Acha a raiz e guarda os valores
         metodos.Bissecao(a, casasdecimais, iteracoes, AoT); // idem
         metodos.posicao_falsa(a, casasdecimais, iteracoes, AoT); // idem
         vetor_metodos.push_back(metodos); // armazena no vetor
     }
     // mostrar dados armazenados
-    for (int j = 0; j<foguetes; j++){ // loop na quantidade de foguetes
-        for (int i = 0; i < iteracoes; i++){ // loop entre os valore guardados
-            float tmpErrPosFalsa = vetor_metodos[j].datametodos[2].erro[i];
-            float tmpDeslocPosFalsa = vetor_metodos[j].datametodos[2].deslocamento[1];
-
-            float tmpErrNewton = vetor_metodos[j].datametodos[1].erro[i];
-            float tmpDeslocNewton = vetor_metodos[j].datametodos[1].deslocamento[i];
-            
-            float tmpErrBissecao = vetor_metodos[j].datametodos[0].erro[i];
-            float tmpDeslocBissecao = vetor_metodos[j].datametodos[0].deslocamento[i];
-            string  tab = "             ";
-            if(i == 0){
-                cout<<"ITERACAO"<<tab<<tab;
-                cout<<"POSFALSA"<<tab<<tab;
-                cout<<"NEWTON"<<tab<<tab;
-                cout<<"BISSECAO" << endl;
-            }
-            
-                cout<<i<<tab<<tab;
-                cout<<"E: "<<tmpErrPosFalsa;
-                cout<<"/d: "<<tmpDeslocPosFalsa<<tab<<tab;
-                cout<<"E: "<<tmpErrNewton;
-                cout<<"/d: "<<tmpDeslocNewton<<tab<<tab;
-                cout<<"E: "<<tmpErrBissecao;
-                cout<<"/d: "<<tmpDeslocBissecao<<endl;
+    string  tab = "             "; // para organizar na tela
+    for(int i = 0; i<3; i++){ // loop nos metodos implementados
+        if(i == 0){ // cabecalho
+            cout<<"FOGUETE"<<tab;
+            cout<<"METODO"<<tab;
+            cout<<"RAIZ"<<tab;
+            cout<<"ERRO"<<tab;
+            cout<<"AJUSTE"<<tab;
+            cout<<"ISOLAMENTO" << endl;
+        }
+        for (int j = 0; j<foguetes; j++){ // loop na quantidade de foguetes
+            cout<<j+1<<tab;
+            cout<<vetor_metodos[j].datametodos[i].nome<<tab;
+            cout<<vetor_metodos[j].datametodos[i].raiz<<tab;
+            cout<<vetor_metodos[j].datametodos[i].erro<<tab;
+            cout<<vetor_metodos[j].ajuste<<tab;
+            float a = vetor_metodos[j].getA();
+            float b = vetor_metodos[j].getB();
+            cout<<"["<<a<<","<<b<<"]"<< endl;
         }
     }
     return 0;
