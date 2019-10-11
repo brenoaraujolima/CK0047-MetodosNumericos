@@ -16,6 +16,16 @@ private:
     float f(float d, float a);//metodo da funcao que o professor deu
 public:
     float ajuste;
+    /*
+    Armazenaremos dados calculados por cada metodo para serem utilizados posteriormente
+    erros: array com o historico dos erros calculados em cada iteracao do metodo em busca da raiz
+    deslocamento: array com o historico do deslocamento, pode ser util pra montar um grafico
+    erro: erro final calculado (ultimo erro inserido no array erros)
+    raiz: caso encontre uma raiz, sera armazenada aqui 
+    (posteriormente pode-se pensar em usar um array para o caso de funcoes com multiplas raizes)
+    iter: quantidade de iteracoes necessarias ate encontrar a raiz aproximada
+    converge: registra se o metodo converge ou nao
+    */
     struct dataMetodos{
         std::string nome;
         float * erros;
@@ -33,6 +43,7 @@ public:
         datametodos.push_back({"Pos Falsa", new float[maxIter], new float[maxIter]});
       }
     ~Metodos(){ // destrutor
+        datametodos.clear();
     }
     float Bissecao(float a, int nd, int kmax, bool escolha);
     float newton(float a, int nd, int kmax, bool escolha );//(descricao detalhada no metodo)

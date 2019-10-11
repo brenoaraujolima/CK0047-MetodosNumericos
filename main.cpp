@@ -1,5 +1,6 @@
 #include <vector>
 #include <iostream>
+#include <iomanip>
 #include "Metodos.h"
 #include "Interface.h"
 
@@ -10,11 +11,14 @@ int main()
     Interface interface;
     int foguetes = 0; // quantidade de foguetes
     float E; // Erro márimo permitido
-    interface.menuInicial(&foguetes, &E);
-    int iteracoes = 10; // hardcoded
-    float casasdecimais = 5; // hardcoded
+    int iteracoes = 100; // hardcoded
+    float casasdecimais = 9; // hardcoded
     bool AoT = 1; // hardcoded, escolha entre truncamento e arredontamento nos calculos
 
+    // monta tela inicial
+    interface.menuInicial(&foguetes, &E);
+    interface.descricao();
+    
     // para cada foguete, instaciamos uma classe com os métodos e armazenamos no vetor
     for (int i = 0; i< foguetes; i++)
     {
@@ -23,8 +27,8 @@ int main()
         cin >> a;
         Metodos metodos = Metodos(iteracoes);
         // setando os parametros comuns a todos os métodos
-        metodos.setA(1.0f); // hardcoded inicio do intervalo (testes)
-        metodos.setB(5.0f); // hardcoded fim do intervalo (teste)
+        metodos.setA(0.0001f); // hardcoded inicio do intervalo (testes)
+        metodos.setB(1000.0f); // hardcoded fim do intervalo (teste)
         metodos.setErro(E); // Setando o erro permitido
         metodos.ajuste = a; // Setando o ajuste
         metodos.newton(a, casasdecimais, iteracoes, AoT); // Acha a raiz e guarda os valores
@@ -33,25 +37,35 @@ int main()
         vetor_metodos.push_back(metodos); // armazena no vetor
     }
     // mostrar dados armazenados
-    string  tab = "             "; // para organizar na tela
+    int espaco = 15; // tabulacao
     for(int i = 0; i<3; i++){ // loop nos metodos implementados
         if(i == 0){ // cabecalho
-            cout<<"FOGUETE"<<tab;
-            cout<<"METODO"<<tab;
-            cout<<"RAIZ"<<tab;
-            cout<<"ERRO"<<tab;
-            cout<<"AJUSTE"<<tab;
-            cout<<"ISOLAMENTO" << endl;
+            cout<<"FOG."<<setw(10);
+            cout<<"METODO"<<setw(15);
+            cout<<"RAIZ"<<setw(15);
+            cout<<"ERRO"<<setw(17);
+            cout<<"AJUSTE"<<setw(20);
+            cout<<"ISOLAMENTO"<<setw(20);
+            cout<<"CONVERGE?" << endl;
         }
         for (int j = 0; j<foguetes; j++){ // loop na quantidade de foguetes
-            cout<<j+1<<tab;
-            cout<<vetor_metodos[j].datametodos[i].nome<<tab;
-            cout<<vetor_metodos[j].datametodos[i].raiz<<tab;
-            cout<<vetor_metodos[j].datametodos[i].erro<<tab;
-            cout<<vetor_metodos[j].ajuste<<tab;
+            
+            cout<<j+1<<setw(espaco);
+            cout<<setprecision(casasdecimais)<<fixed;
+            cout<<vetor_metodos[j].datametodos[i].nome<<setw(espaco);
+            cout<<vetor_metodos[j].datametodos[i].raiz<<setw(espaco);
+            cout<<vetor_metodos[j].datametodos[i].erro<<setw(espaco);
+            cout<<vetor_metodos[j].ajuste<<setw(espaco);
             float a = vetor_metodos[j].getA();
             float b = vetor_metodos[j].getB();
-            cout<<"["<<a<<","<<b<<"]"<< endl;
+            cout<<setprecision(0)<<fixed;
+            cout<<"["<<a<<","<<b<<"]"<< setw(espaco);
+            if(vetor_metodos[j].datametodos[i].converge){
+                cout<<"sim, em "<< vetor_metodos[j].datametodos[i].iter<< endl;
+            }else{
+                cout<<"nao, em "<< vetor_metodos[j].datametodos[i].iter<< endl;
+            }
+            
         }
     }
     return 0;
