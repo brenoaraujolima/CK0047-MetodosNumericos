@@ -2,31 +2,33 @@
 #include<cstdio>
 //#include<locale.h>
 #include<stdlib.h>
+#include "Interface.h"
+
 using namespace std;
 
 
-void fonteVerde() {
+void Interface::fonteVerde() {
     cout << "\033[0;32m";
 }
 
-void resetarFonte() {
+void Interface::resetarFonte() {
     cout<<"\033[1;0m";
 }
 
-void inicioCarro() {
+void Interface::inicioCarro() {
     cout << "\t   ";
 }
 
-void molduraHorizontal() {
+void Interface::molduraHorizontal() {
     for(int i=0; i<80; i++) {cout <<"═";}
 }
 
-void percorrerLinha() {
+void Interface::percorrerLinha() {
     fonteVerde();
     for(int i=0; i<80; i++) {cout <<" ";}
 }
 
-void header() {
+void Interface::header() {
     fonteVerde();  
     inicioCarro();
     cout << "╔";
@@ -80,7 +82,7 @@ void header() {
     cout<<"╝"<<endl;
 }
 
-void descricao() {
+void Interface::descricao() {
     fonteVerde();
     inicioCarro();
     cout<<"│";
@@ -118,46 +120,17 @@ void descricao() {
     cout<<endl;
 }
 
-void menuInicial() {
-    int foguetes;
-    int parametro;
-    float E;
+void Interface::menuInicial(int * foguetes, float * E) {
     fonteVerde();
     inicioCarro();
     cout<<"\t"<<"Insira o nº de foguetes: ";
-    cin >> foguetes;
+    cin >> *foguetes;
     inicioCarro();
     cout<<"\t"<<"Informe a precisão desejada: ";
-    cin >> E;
+    cin >> *E;
     system("clear");
     header();
     inicioCarro();
-    cout << "\t Você está avaliando "<< foguetes << " foguetes."<<endl<<endl;
+    cout << "\t Você está avaliando "<< *foguetes << " foguetes."<<endl<<endl;
 
-    for (int i = 0; i< foguetes; i++)
-    {
-        float a;
-        inicioCarro();
-        cout << "\t Informe o parametro de ajuste para o foguete "<<i+1<<":";
-        cin >> a;
-        /*Metodos metodos = Metodos(iteracoes);
-        // setando os parametros comuns a todos os métodos
-        metodos.setA(1.0f); // hardcoded inicio do intervalo (testes)
-        metodos.setB(5.0f); // hardcoded fim do intervalo (teste)
-        metodos.setErro(E); // Setando o erro permitido
-        metodos.newton(a, casasdecimais, iteracoes, AoT); // Acha a raiz e guarda os valores
-        metodos.Bissecao(a, casasdecimais, iteracoes, AoT); // idem
-        metodos.posicao_falsa(a, casasdecimais, iteracoes, AoT); // idem
-        vetor_metodos.push_back(metodos); // armazena no vetor*/
-    }
-}
-
-
-int main() {
-    //setlocale(LC_ALL, "");
-    header();
-    descricao();
-    menuInicial();
-
-    return 0;
 }

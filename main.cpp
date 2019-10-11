@@ -1,22 +1,20 @@
 #include <vector>
 #include <iostream>
 #include "Metodos.h"
+#include "Interface.h"
 
 using namespace std;
 int main() 
 {
     vector<Metodos> vetor_metodos; // armazena n objetos Metodos de acordo com a entrada do usuario
+    Interface interface;
     int foguetes = 0; // quantidade de foguetes
     float E; // Erro márimo permitido
+    interface.menuInicial(&foguetes, &E);
     int iteracoes = 10; // hardcoded
     float casasdecimais = 5; // hardcoded
     bool AoT = 1; // hardcoded, escolha entre truncamento e arredontamento nos calculos
 
-    // dados de entrada pelo usuario
-    cout << "Informe a quantidade de foguetes: ";
-    cin >> foguetes;
-    cout << "Informe a precisao desejada: ";
-    cin >> E;
     // para cada foguete, instaciamos uma classe com os métodos e armazenamos no vetor
     for (int i = 0; i< foguetes; i++)
     {
