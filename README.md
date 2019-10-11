@@ -18,3 +18,8 @@ f) Fornecer um quadro comparativo, com isolamento, raízes e dados para cada mé
 g) Analisar o efeito da variação do valor de a de cada foguete, para cada método dado.<br>
 <b>Dados de entrada:</b> n (número de foguetes), a (de cada foguete) e ε (precisão).<br>
 <b>Dados de saída:</b> quadros resposta (com d, EA para cada foguete e método) e comparativo
+
+Compilar no linux:<br>
+<code>g++ main.cpp Metodos.cpp -o main</code><br>
+para executar<br>
+<code>./main</code>
