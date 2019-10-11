@@ -1,4 +1,5 @@
 #include <string>
+#include <vector>
 #ifndef METODOS_H
 #define METODOS_H
 
@@ -18,13 +19,15 @@ public:
         std::string nome;
         float * erro;
         float * deslocamento;
+        int iter;
     };
-    dataMetodos databissecao, datanewton, dataposfalsa;
+    vector<dataMetodos> datametodos;
+    
     Metodos(int maxIter){ // construtor
-        databissecao = {"bissecao", new float[maxIter], new float[maxIter]};
-        datanewton = {"Newton", new float[maxIter], new float[maxIter]};
-        dataposfalsa = {"Pos Falsa", new float[maxIter], new float[maxIter]};
-    }
+        datametodos.push_back({"Bissecao", new float[maxIter], new float[maxIter]});
+        datametodos.push_back({"Newton", new float[maxIter], new float[maxIter]});
+        datametodos.push_back({"Pos Falsa", new float[maxIter], new float[maxIter]});
+      }
     ~Metodos(){ // destrutor
     }
     float Bissecao(float a, int nd, int kmax, bool escolha);

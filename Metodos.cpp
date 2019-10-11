@@ -46,6 +46,7 @@ bool Metodos::testeSinal(float a, float b, float ajuste) {
 
 //@parametros (parametro de ajuste, numero de decimais, máximo de iterações, escolha de arredondamento ou truncamento)
 float Metodos::Bissecao(float ajuste, int nd, int kmax, bool escolha){
+    float tmpagora = time(0);
     float intervX, d , Fd;
     int k = 0;
     
@@ -69,17 +70,18 @@ float Metodos::Bissecao(float ajuste, int nd, int kmax, bool escolha){
             FB1 = Fd;
         }
         intervX = abs(A1-B1);
-        databissecao.erro[k] = AoT(intervX, nd, escolha);
-        databissecao.deslocamento[k] = AoT(d, nd, escolha);
+        datametodos[0].erro[k] = AoT(intervX, nd, escolha);
+        datametodos[0].deslocamento[k] = AoT(d, nd, escolha);
         k++;
     } while(abs(Fd) > E && intervX > E && k <= kmax);
     if(intervX > abs(Fd)){
-        databissecao.erro[k] = AoT(abs(Fd), nd, escolha);
+        datametodos[0].erro[k] = AoT(abs(Fd), nd, escolha);
     }else{
-        databissecao.erro[k] = AoT(intervX, nd, escolha);
+        datametodos[0].erro[k] = AoT(intervX, nd, escolha);
     }
     
-    databissecao.deslocamento[k] = AoT(d, nd, escolha);
+    datametodos[0].deslocamento[k] = AoT(d, nd, escolha);
+    datametodos[0].iter = k;
     return d;
 }
 
@@ -96,24 +98,24 @@ float Metodos::newton(float a, int nd, int kmax, bool escolha) {
     xAnterior = (xAnterior + xAtual)/2;
     if(abs(f(xAnterior, a))<E) {
         return xAnterior;
-        datanewton.deslocamento[iter] = AoT(xAnterior, nd, escolha);
-        datanewton.erro[iter] = AoT(abs(f(xAnterior, a)), nd, escolha);
+        datametodos[1].deslocamento[iter] = AoT(xAnterior, nd, escolha);
+        datametodos[1].erro[iter] = AoT(abs(f(xAnterior, a)), nd, escolha);
     }
 
     while(iter<=kmax) {
         xAtual = xAnterior - (f(xAnterior, a)/derivadaF(xAnterior, a));
         if(abs(f(xAtual, a))<E || abs(xAtual - xAnterior)<E) {
             return xAtual;
-            datanewton.deslocamento[iter] = AoT(xAtual, nd, escolha);
-            datanewton.erro[iter] = AoT(min(abs(f(xAtual, a)), abs(xAtual - xAnterior)), nd, escolha);
+            datametodos[1].deslocamento[iter] = AoT(xAtual, nd, escolha);
+            datametodos[1].erro[iter] = AoT(min(abs(f(xAtual, a)), abs(xAtual - xAnterior)), nd, escolha);
+            datametodos[1].iter = iter;
         }
-        datanewton.deslocamento[iter] = AoT(xAtual, nd, escolha);
-        datanewton.erro[iter] = AoT(min(abs(f(xAtual, a)), abs(xAtual - xAnterior)), nd, escolha);
+        datametodos[1].deslocamento[iter] = AoT(xAtual, nd, escolha);
+        datametodos[1].erro[iter] = AoT(min(abs(f(xAtual, a)), abs(xAtual - xAnterior)), nd, escolha);
         xAnterior = xAtual;
         iter++;
-      
     }
- 
+    cout << "nao convergiu apos "<<iter<<" iteracoes"<< endl;
     return xAtual;
 }
 
