@@ -148,7 +148,7 @@ float Metodos::posicao_falsa(float a, int nd, int kmax, bool escolha){
     while(k <= kmax){
         d = AoT(B1 - (FB1 * (B1 - A1))/(FB1 - FA1), nd, escolha );
         Fd = AoT(f(d,ajuste), nd, escolha);
-        if(abs(d - B1) < E || abs(f(d,ajuste)) < E){
+        if(abs(d - B1) < E || abs(Fd) < E){
             //achou a aproximacao
             datametodos[2].erros[k] = AoT(intervX, nd, escolha);
             datametodos[2].deslocamento[k] = AoT(d, nd, escolha);
