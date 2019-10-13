@@ -23,7 +23,9 @@ int main()
         interface.descricao();
         interface.menuInicial(&foguetes, &E);
         interface.loopParametros(&foguetes, &iteracoes, &E, &casasdecimais, &AoT, vetor_metodos);
-        
+        for(int i = 0; i<foguetes; i++){
+            vetor_metodos[i].setGravaDados(i);
+        }
         cout<<endl<<endl;
         
         // mostrar dados armazenados
@@ -103,6 +105,8 @@ int main()
                 
             }
         }
+        
+        
         interface.decisaoFinal(&decisao);
 
     }while(decisao == 1);

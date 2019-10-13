@@ -61,6 +61,8 @@ public:
     void setB(float interf);//atribuir valor para o fim do intervalo
     float getB();
     void setErro(float e);
+    // Salva os dados em um arquivo para relatorio
+    void setGravaDados(int foguete);
  };
  
 #endif

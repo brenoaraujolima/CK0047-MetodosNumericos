@@ -1,5 +1,8 @@
 #include <iostream>
 #include <cmath>
+#include <iostream>
+#include <fstream>
+#include <ctime>
 #include "Metodos.h"
 
 using namespace std;
@@ -169,4 +172,24 @@ float Metodos::posicao_falsa(float a, int nd, int kmax, bool escolha){
     };
     datametodos[2].iter = k-1;
     datametodos[2].converge = false;
+}
+
+void Metodos::setGravaDados(int foguete){
+    for(int i = 0; i<3; i++){
+        float *erros = datametodos[i].erros;
+        float *deslocaento = datametodos[i].deslocamento;
+        ofstream arquivoerro;
+        //ofstream arquivodesl;
+        arquivoerro.open ("err_fog" + to_string(foguete) + "met"+to_string(i-1)+".txt");
+        //arquivodesl.open ("desloc_fog" + to_string(foguete) + "met"+to_string(i-1)+".txt");
+        for(int j = 0; j<datametodos[i].iter; j++){
+            arquivoerro << erros[j];
+            arquivoerro << "\t";
+            arquivoerro << deslocaento[j];
+            arquivoerro << "\t";
+            arquivoerro<<"\n";
+        }
+        arquivoerro.close();
+    }
+    
 }
