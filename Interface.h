@@ -22,6 +22,10 @@ class Interface{
         void descricao();
         void menuInicial(int * foguetes, float * E);
         void loopParametros(int *foguetes, int *iteracoes, float *E, float *casasdecimais, bool *AoT, vector<Metodos>& vetor_metodos);
+        void allParametros(int *foguetes, int *iteracoes, float *E, float *casasdecimais, bool *AoT, vector<Metodos>& vetor_metodos);
+        
+        void mostradados(vector<Metodos> vetor_metodos, int foguetes, int casasdecimais);
+        void menu();
         void decisaoFinal(bool *decisao);
 };
 #endif
