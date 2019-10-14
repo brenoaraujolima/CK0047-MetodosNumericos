@@ -62,7 +62,7 @@ public:
     float getB();
     void setErro(float e);
     // Salva os dados em um arquivo para relatorio
-    void setGravaDados(int foguete);
+    void setGravaDados(int foguete, int iteracoes);
  };
  
 #endif

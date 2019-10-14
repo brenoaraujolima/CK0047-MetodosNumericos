@@ -157,10 +157,12 @@ float Metodos::posicao_falsa(float a, int nd, int kmax, bool escolha){
             datametodos[2].deslocamento[k] = AoT(d, nd, escolha);
             datametodos[2].iter = k;
             datametodos[2].raiz = d;
-            datametodos[2].erro = min(abs(d - B1), abs(f(d,ajuste)));
+            datametodos[2].erro = abs(Fd);
             datametodos[2].converge = true;
             return min(abs(d - B1), abs(f(d,ajuste)));
         }
+        datametodos[2].erros[k] = abs(Fd);
+        datametodos[2].deslocamento[k] = d;
         if (FA1 * Fd > 0){
             A1 = d;
             FA1 = Fd;
@@ -174,22 +176,24 @@ float Metodos::posicao_falsa(float a, int nd, int kmax, bool escolha){
     datametodos[2].converge = false;
 }
 
-void Metodos::setGravaDados(int foguete){
-    for(int i = 0; i<3; i++){
-        float *erros = datametodos[i].erros;
-        float *deslocaento = datametodos[i].deslocamento;
-        ofstream arquivoerro;
-        //ofstream arquivodesl;
-        arquivoerro.open ("err_fog" + to_string(foguete) + "met"+to_string(i-1)+".txt");
-        //arquivodesl.open ("desloc_fog" + to_string(foguete) + "met"+to_string(i-1)+".txt");
-        for(int j = 0; j<datametodos[i].iter; j++){
-            arquivoerro << erros[j];
-            arquivoerro << "\t";
-            arquivoerro << deslocaento[j];
-            arquivoerro << "\t";
-            arquivoerro<<"\n";
-        }
-        arquivoerro.close();
+void Metodos::setGravaDados(int foguete, int iteracoes){
+    ofstream arquivoerro;
+    //ofstream arquivodesl;
+    arquivoerro.open ("erros.txt");
+    
+    for(int j = 0; j<iteracoes; j++){
+        arquivoerro << j+1;
+        arquivoerro << "\t";
+        
+        arquivoerro << datametodos[0].erros[j];
+        arquivoerro << "\t";
+        arquivoerro << datametodos[1].erros[j];
+        arquivoerro << "\t";
+        arquivoerro << datametodos[2].erros[j];
+        arquivoerro << "\t";
+        arquivoerro<<"\n";
     }
+    arquivoerro.close();
+
     
 }

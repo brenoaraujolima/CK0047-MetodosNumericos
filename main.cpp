@@ -11,8 +11,8 @@ int main()
     Interface interface;
     int foguetes = 0; // quantidade de foguetes
     float E; // Erro márimo permitido
-    int iteracoes = 100; // hardcoded
-    float casasdecimais = 9; // hardcoded
+    int iteracoes = 20; // hardcoded
+    float casasdecimais = 7; // hardcoded
     bool AoT = 1; // hardcoded, escolha entre truncamento e arredontamento nos calculos
 
     int decisao = 1;
@@ -27,9 +27,7 @@ int main()
             interface.descricao();
             interface.menuInicial(&foguetes, &E);
             interface.loopParametros(&foguetes, &iteracoes, &E, &casasdecimais, &AoT, vetor_metodos);
-            for(int i = 0; i<foguetes; i++){
-                vetor_metodos[i].setGravaDados(i);
-            }
+            vetor_metodos[0].setGravaDados(foguetes, iteracoes);
             cout<<"Os dados foram calculados! tecle 2 para mostrar os dados"<<endl;
             break;
         case 2:
@@ -46,9 +44,7 @@ int main()
             interface.menu();
             interface.printparametros(foguetes, iteracoes, E, casasdecimais, AoT);
             interface.allParametros(&foguetes, &iteracoes, &E, &casasdecimais, &AoT, vetor_metodos);
-            for(int i = 0; i<foguetes; i++){
-                vetor_metodos[i].setGravaDados(i);
-            }
+            vetor_metodos[0].setGravaDados(foguetes, iteracoes);
             cout<<"Os dados foram calculados! tecle 2 para mostrar"<<endl;
             
             break;
@@ -59,9 +55,7 @@ int main()
             interface.descricao();
             interface.menuInicial(&foguetes, &E);
             interface.loopParametros(&foguetes, &iteracoes, &E, &casasdecimais, &AoT, vetor_metodos);
-            for(int i = 0; i<foguetes; i++){
-                vetor_metodos[i].setGravaDados(i);
-            }
+            vetor_metodos[0].setGravaDados(foguetes, iteracoes);
             break;
         }
         cin >> decisao;

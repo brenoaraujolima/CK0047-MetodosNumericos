@@ -158,8 +158,8 @@ void Interface::loopParametros(int *foguetes, int *iteracoes, float *E, float *c
         //fonteVerde();
         Metodos metodos = Metodos(*iteracoes);
         // setando os parametros comuns a todos os métodos
-        metodos.setA(0.0001f); // hardcoded inicio do intervalo (testes)
-        metodos.setB(1000.0f); // hardcoded fim do intervalo (teste)
+        metodos.setA(1.0f); // hardcoded inicio do intervalo (testes)
+        metodos.setB(4.0f); // hardcoded fim do intervalo (teste)
         metodos.setErro(*E); // Setando o erro permitido
         metodos.ajuste = a; // Setando o ajuste
         metodos.newton(a, *casasdecimais, *iteracoes, *AoT); // Acha a raiz e guarda os valores
