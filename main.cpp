@@ -36,12 +36,15 @@ int main()
             // monta tela inicial
             interface.header();
             interface.menu();
+            interface.printparametros(foguetes, iteracoes, E, casasdecimais, AoT);
+            cout<<endl<<endl;
             interface.mostradados(vetor_metodos, foguetes, casasdecimais);
             break;
         case 3:
             // monta tela inicial
             interface.header();
             interface.menu();
+            interface.printparametros(foguetes, iteracoes, E, casasdecimais, AoT);
             interface.allParametros(&foguetes, &iteracoes, &E, &casasdecimais, &AoT, vetor_metodos);
             for(int i = 0; i<foguetes; i++){
                 vetor_metodos[i].setGravaDados(i);

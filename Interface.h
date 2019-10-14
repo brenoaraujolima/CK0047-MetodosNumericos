@@ -20,6 +20,7 @@ class Interface{
         void percorrerLinha();
         void header();
         void descricao();
+        void printparametros(int foguetes, int iteracoes, float E, float casasdecimais, bool AoT);
         void menuInicial(int * foguetes, float * E);
         void loopParametros(int *foguetes, int *iteracoes, float *E, float *casasdecimais, bool *AoT, vector<Metodos>& vetor_metodos);
         void allParametros(int *foguetes, int *iteracoes, float *E, float *casasdecimais, bool *AoT, vector<Metodos>& vetor_metodos);

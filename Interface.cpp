@@ -295,12 +295,17 @@ void Interface::mostradados(vector<Metodos> vetor_metodos, int foguetes, int cas
             }
         }
 }
+void Interface::printparametros(int foguetes, int iteracoes, float E, float casasdecimais, bool AoT){
+    fonteVerde();
+    inicioCarro();
+    cout<<"│";
+    cout << "\tFoguetes:"<<foguetes<<" Iteracoes: "<<iteracoes<<" Erro: "<<E <<" Casas Dec.:"<<casasdecimais;
+    cout<<"\t\t\t\t    │"<<endl;
+}
 void Interface::menu() {
     fonteVerde();
     inicioCarro();
     cout<<"│";
     cout << "\tMENU -> [1 = RECALCULAR] [2 = DADOS] [3 = RECALIBRAR] [0 = SAIR]";
     cout<<"\t    │"<<endl;
-    
-    
 }
