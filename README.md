@@ -20,6 +20,6 @@ g) Analisar o efeito da variação do valor de a de cada foguete, para cada mét
 <b>Dados de saída:</b> quadros resposta (com d, EA para cada foguete e método) e comparativo
 
 Compilar no linux:<br>
-<code>g++ main.cpp Metodos.cpp -o main</code><br>
+<code>g++ main.cpp Metodos.cpp Interface.cpp -o main</code><br>
 para executar<br>
 <code>./main</code>
