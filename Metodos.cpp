@@ -83,7 +83,10 @@ float Metodos::Bissecao(float ajuste, int nd, int kmax, bool escolha){
         datametodos[0].b[k] = B1;
         if(d > 2 + E){
             datametodos[0].fogueteexplode = true;
+        }else{
+            datametodos[0].fogueteexplode = false;
         }
+
         if(intervX < E){
             // valor aproximado encontrado, retornando
             datametodos[0].converge = true;
@@ -144,9 +147,11 @@ float Metodos::newton(float a, int nd, int kmax, bool escolha) {
         datametodos[1].Fb[iter] = AoT(f(xAtual, a), nd, escolha);
         datametodos[1].a[iter] = xAnterior;
         datametodos[1].b[iter] = xAtual;
-        cout<<xAtual<<",";
+        
         if(xAtual > 2 + E){
             datametodos[1].fogueteexplode = true;
+        }else{
+            datametodos[1].fogueteexplode = false;
         }
         
         xAnterior = xAtual;
@@ -196,6 +201,8 @@ float Metodos::posicao_falsa(float a, int nd, int kmax, bool escolha){
         }   
         if(d > 2 + E){
             datametodos[0].fogueteexplode = true;
+        }else{
+            datametodos[0].fogueteexplode = false;
         }
         k++;
     };
@@ -226,14 +233,14 @@ void Metodos::setGravaDados(int foguete, int iteracoes){
     // grafico de evolucao da secante
     arquivoerro.open ("dados_secante.txt");
     for(int j = 0; j<iteracoes; j++){
-        arquivoerro << datametodos[2].a[j];
+        arquivoerro << datametodos[1].a[j];
         arquivoerro << "\t";
-        arquivoerro << datametodos[2].Fa[j];
+        arquivoerro << datametodos[1].Fa[j];
         arquivoerro << "\t";
         arquivoerro<<"\n";
-        arquivoerro << datametodos[2].b[j];
+        arquivoerro << datametodos[1].b[j];
         arquivoerro << "\t";
-        arquivoerro << datametodos[2].Fb[j];
+        arquivoerro << datametodos[1].Fb[j];
         arquivoerro<<"\n";
         arquivoerro<<"\n";
     }

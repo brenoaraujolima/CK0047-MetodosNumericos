@@ -304,18 +304,21 @@ void Interface::mostradados(vector<Metodos> vetor_metodos, int foguetes, int cas
 void Interface::analisar(vector<Metodos> vetor_metodos, int foguetes, int iteracoes){
     for(int i = 0;i<foguetes; i++){
         resetarFonte();
-        cout<<"Foguete numero "<<i+1<<endl;
+        cout<<setprecision(7)<<fixed;
+        cout<<"Foguete numero "<<i+1 << " ajuste: "<<vetor_metodos[i].ajuste<<endl;
         for(int j = 0; j<3; j++){
             cout<<"Metodo> " <<vetor_metodos[i].datametodos[j].nome<<" ------ > ";
-            if(vetor_metodos[i].datametodos[j].fogueteexplode){
+            if(vetor_metodos[i].datametodos[j].fogueteexplode || !vetor_metodos[i].datametodos[j].converge){
                 fonteRed();
                 cout<<"falha!"<<endl;
-                
+                resetarFonte(); 
             }else{
                 fonteVerde();
                 cout<<"Sucesso!"<<endl;
+                resetarFonte();
             }
         }
+        cout<<"==================================="<<endl;
     }
 }
 void Interface::printparametros(int foguetes, int iteracoes, float E, float casasdecimais, bool AoT){
