@@ -2,6 +2,7 @@
 #include<iomanip>
 #include<cstdio>
 #include<vector>
+#include<algorithm>
 //#include<locale.h>
 #include<stdlib.h>
 #include "Metodos.h"
@@ -12,6 +13,9 @@ using namespace std;
 
 void Interface::fonteVerde() {
     cout << "\033[0;32m";
+}
+void Interface::fonteRed() {
+    cout << "\033[0;31m";
 }
 
 void Interface::resetarFonte() {
@@ -296,6 +300,24 @@ void Interface::mostradados(vector<Metodos> vetor_metodos, int foguetes, int cas
             }
         }
 }
+// para analizar se o foquete explode ou nao, (ou seja, se deslocamento > (2 + o erro permitido))
+void Interface::analisar(vector<Metodos> vetor_metodos, int foguetes, int iteracoes){
+    for(int i = 0;i<foguetes; i++){
+        resetarFonte();
+        cout<<"Foguete numero "<<i+1<<endl;
+        for(int j = 0; j<3; j++){
+            cout<<"Metodo> " <<vetor_metodos[i].datametodos[j].nome<<" ------ > ";
+            if(vetor_metodos[i].datametodos[j].fogueteexplode){
+                fonteRed();
+                cout<<"falha!"<<endl;
+                
+            }else{
+                fonteVerde();
+                cout<<"Sucesso!"<<endl;
+            }
+        }
+    }
+}
 void Interface::printparametros(int foguetes, int iteracoes, float E, float casasdecimais, bool AoT){
     fonteVerde();
     inicioCarro();
@@ -307,6 +329,6 @@ void Interface::menu() {
     fonteVerde();
     inicioCarro();
     cout<<"│";
-    cout << "\tMENU -> [1 = RECALCULAR] [2 = DADOS] [3 = RECALIBRAR] [0 = SAIR]";
+    cout << "\t[1 = RECALCULAR][2 = DADOS][3 = RECALIBRAR][4 = ANALISAR][0 = SAIR]";
     cout<<"\t    │"<<endl;
 }

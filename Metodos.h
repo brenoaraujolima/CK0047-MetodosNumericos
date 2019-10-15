@@ -39,6 +39,7 @@ public:
         float raiz;
         int iter;
         bool converge;
+        bool fogueteexplode;
     };
     vector<dataMetodos> datametodos;
     

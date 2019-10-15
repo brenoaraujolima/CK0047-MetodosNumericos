@@ -52,6 +52,15 @@ int main()
             cout<<"Os dados foram calculados! tecle 2 para mostrar"<<endl;
             
             break;
+        case 4:
+            // opcao para mostrar a analise
+            // monta tela inicial
+            interface.header();
+            interface.menu();
+            interface.printparametros(foguetes, iteracoes, E, casasdecimais, AoT);
+            interface.analisar(vetor_metodos, foguetes, iteracoes);
+            
+            break;
         default:
             // mesmo que a opcao "1", fica como padrao
             // monta tela inicial

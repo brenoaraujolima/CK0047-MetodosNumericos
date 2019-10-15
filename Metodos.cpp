@@ -81,7 +81,9 @@ float Metodos::Bissecao(float ajuste, int nd, int kmax, bool escolha){
         datametodos[0].Fb[k] = FB1;
         datametodos[0].a[k] = A1;
         datametodos[0].b[k] = B1;
-        
+        if(d > 2 + E){
+            datametodos[0].fogueteexplode = true;
+        }
         if(intervX < E){
             // valor aproximado encontrado, retornando
             datametodos[0].converge = true;
@@ -142,6 +144,10 @@ float Metodos::newton(float a, int nd, int kmax, bool escolha) {
         datametodos[1].Fb[iter] = AoT(f(xAtual, a), nd, escolha);
         datametodos[1].a[iter] = xAnterior;
         datametodos[1].b[iter] = xAtual;
+        cout<<xAtual<<",";
+        if(xAtual > 2 + E){
+            datametodos[1].fogueteexplode = true;
+        }
         
         xAnterior = xAtual;
         iter++;
@@ -188,10 +194,14 @@ float Metodos::posicao_falsa(float a, int nd, int kmax, bool escolha){
             B1 = d;
             FB1 = Fd;
         }   
+        if(d > 2 + E){
+            datametodos[0].fogueteexplode = true;
+        }
         k++;
     };
     datametodos[2].iter = k-1;
     datametodos[2].converge = false;
+    
 }
 
 void Metodos::setGravaDados(int foguete, int iteracoes){

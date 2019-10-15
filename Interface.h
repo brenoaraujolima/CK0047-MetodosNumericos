@@ -14,6 +14,7 @@ class Interface{
         ~Interface(){ // destrutor
         }
         void fonteVerde();
+        void fonteRed();
         void resetarFonte();
         void inicioCarro();
         void molduraHorizontal();
@@ -26,6 +27,7 @@ class Interface{
         void allParametros(int *foguetes, int *iteracoes, float *E, float *casasdecimais, bool *AoT, vector<Metodos>& vetor_metodos);
         
         void mostradados(vector<Metodos> vetor_metodos, int foguetes, int casasdecimais);
+        void analisar(vector<Metodos> vetor_metodos, int foguetes, int iteracoes);
         void menu();
         void decisaoFinal(bool *decisao);
 };
