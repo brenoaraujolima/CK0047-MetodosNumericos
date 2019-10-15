@@ -198,7 +198,8 @@ void Interface::allParametros(int *foguetes, int *iteracoes, float *E, float *ca
     resetarFonte();
     cin >> *AoT;
     for (int i = 0; i< *foguetes; i++)
-    {
+    {   
+        
         float a;
         cout << "\tInforme o parametro de ajuste para o foguete "<<i+1<<":  ";
         resetarFonte();
@@ -206,8 +207,8 @@ void Interface::allParametros(int *foguetes, int *iteracoes, float *E, float *ca
         fonteVerde();
         Metodos metodos = Metodos(*iteracoes);
         // setando os parametros comuns a todos os métodos
-        metodos.setA(isolamentoA); // hardcoded inicio do intervalo (testes)
-        metodos.setB(isolamentoB); // hardcoded fim do intervalo (teste)
+        metodos.setA(isolamentoA); 
+        metodos.setB(isolamentoB); 
         metodos.setErro(*E); // Setando o erro permitido
         metodos.ajuste = a; // Setando o ajuste
         metodos.newton(a, *casasdecimais, *iteracoes, *AoT); // Acha a raiz e guarda os valores

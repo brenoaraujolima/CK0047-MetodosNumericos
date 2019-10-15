@@ -77,6 +77,11 @@ float Metodos::Bissecao(float ajuste, int nd, int kmax, bool escolha){
         intervX = abs(A1-B1);
         datametodos[0].erros[k] = AoT(intervX, nd, escolha);
         datametodos[0].deslocamento[k] = AoT(d, nd, escolha);
+        datametodos[0].Fa[k] = FA1;
+        datametodos[0].Fb[k] = FB1;
+        datametodos[0].a[k] = A1;
+        datametodos[0].b[k] = B1;
+        
         if(intervX < E){
             // valor aproximado encontrado, retornando
             datametodos[0].converge = true;
@@ -104,7 +109,12 @@ float Metodos::newton(float a, int nd, int kmax, bool escolha) {
         datametodos[1].converge = false;
         return 0;
     }
-
+    datametodos[1].deslocamento[iter] = AoT(xAtual, nd, escolha);
+    datametodos[1].erros[iter] = AoT(abs(xAtual - xAnterior), nd, escolha);
+    datametodos[1].Fa[iter] = AoT(f(xAnterior, a), nd, escolha);
+    datametodos[1].Fb[iter] = AoT(f(xAtual, a), nd, escolha);
+    datametodos[1].a[iter] = xAnterior;
+    datametodos[1].b[iter] = xAtual;
     xAnterior = (xAnterior + xAtual)/2;
     if(abs(f(xAnterior, a))<E) {
         datametodos[1].deslocamento[iter] = AoT(xAnterior, nd, escolha);
@@ -128,6 +138,10 @@ float Metodos::newton(float a, int nd, int kmax, bool escolha) {
         }
         datametodos[1].deslocamento[iter] = AoT(xAtual, nd, escolha);
         datametodos[1].erros[iter] = AoT(abs(xAtual - xAnterior), nd, escolha);
+        datametodos[1].Fa[iter] = AoT(f(xAnterior, a), nd, escolha);
+        datametodos[1].Fb[iter] = AoT(f(xAtual, a), nd, escolha);
+        datametodos[1].a[iter] = xAnterior;
+        datametodos[1].b[iter] = xAtual;
         
         xAnterior = xAtual;
         iter++;
@@ -163,6 +177,10 @@ float Metodos::posicao_falsa(float a, int nd, int kmax, bool escolha){
         }
         datametodos[2].erros[k] = abs(Fd);
         datametodos[2].deslocamento[k] = d;
+        datametodos[2].Fa[k] = FA1;
+        datametodos[2].Fb[k] = FB1;
+        datametodos[2].a[k] = A1;
+        datametodos[2].b[k] = B1;
         if (FA1 * Fd > 0){
             A1 = d;
             FA1 = Fd;
@@ -180,7 +198,7 @@ void Metodos::setGravaDados(int foguete, int iteracoes){
     ofstream arquivoerro;
     //ofstream arquivodesl;
     arquivoerro.open ("erros.txt");
-    
+    // grafico de comparacao dos metodos (erro versus iteracoes)
     for(int j = 0; j<iteracoes; j++){
         arquivoerro << j+1;
         arquivoerro << "\t";
@@ -195,5 +213,19 @@ void Metodos::setGravaDados(int foguete, int iteracoes){
     }
     arquivoerro.close();
 
-    
+    // grafico de evolucao da secante
+    arquivoerro.open ("dados_secante.txt");
+    for(int j = 0; j<iteracoes; j++){
+        arquivoerro << datametodos[2].a[j];
+        arquivoerro << "\t";
+        arquivoerro << datametodos[2].Fa[j];
+        arquivoerro << "\t";
+        arquivoerro<<"\n";
+        arquivoerro << datametodos[2].b[j];
+        arquivoerro << "\t";
+        arquivoerro << datametodos[2].Fb[j];
+        arquivoerro<<"\n";
+        arquivoerro<<"\n";
+    }
+    arquivoerro.close();
 }

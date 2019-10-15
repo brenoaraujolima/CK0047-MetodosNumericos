@@ -28,8 +28,13 @@ public:
     */
     struct dataMetodos{
         std::string nome;
-        float * erros;
-        float * deslocamento;
+        float * erros; // armazena o historico dos erros
+        float * deslocamento; // armazena o historico do "d"
+        float * Fa; // armazena o historico do f(a)
+        float * Fb; // armazena o historico do f(b)
+        float * a; // armazena o historico do a
+        float * b; // armazena o historico do b
+        
         float erro;
         float raiz;
         int iter;
@@ -38,9 +43,28 @@ public:
     vector<dataMetodos> datametodos;
     
     Metodos(int maxIter){ // construtor
-        datametodos.push_back({"Bissecao", new float[maxIter], new float[maxIter]});
-        datametodos.push_back({"Newton", new float[maxIter], new float[maxIter]});
-        datametodos.push_back({"Pos Falsa", new float[maxIter], new float[maxIter]});
+        datametodos.push_back({"Bissecao", 
+            new float[maxIter], 
+            new float[maxIter],
+            new float[maxIter],
+            new float[maxIter],
+            new float[maxIter],
+            new float[maxIter]});
+        datametodos.push_back({"Newton", 
+            new float[maxIter], 
+            new float[maxIter],
+            new float[maxIter],
+            new float[maxIter],
+            new float[maxIter],
+            new float[maxIter]});
+        datametodos.push_back({"Pos Falsa", 
+            new float[maxIter], 
+            new float[maxIter],
+            new float[maxIter],
+            new float[maxIter],
+            new float[maxIter],
+            new float[maxIter]});
+       
       }
     ~Metodos(){ // destrutor
         datametodos.clear();
