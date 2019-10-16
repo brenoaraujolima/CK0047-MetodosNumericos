@@ -325,6 +325,8 @@ void Interface::printparametros(int foguetes, int iteracoes, float E, float casa
     fonteVerde();
     inicioCarro();
     cout<<"│";
+    cout<<setprecision(casasdecimais)<<fixed;
+    
     cout << "\tFoguetes:"<<foguetes<<" Iteracoes: "<<iteracoes<<" Erro: "<<E <<" Casas Dec.:"<<casasdecimais;
     cout<<"\t\t\t\t    │"<<endl;
 }
