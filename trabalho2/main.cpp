@@ -8,10 +8,10 @@ int main() {
     /*Interface interface = Interface();
     interface.gerarInterface();*/
 
-    vector<vector<float>> minhamatriz{  {3,2,4},
-                                        {1,1,2},
-                                        {4,3,-2}    };
-    vector<float> independente{1,2,3};
+    vector<vector<float>> minhamatriz{  {2,1,1},
+                                        {1,2,0},
+                                        {3,-1,-3}    };
+    vector<float> independente{-2,1,1};
     Metodos metodos = Metodos(minhamatriz, independente, 3);
     vector<float> teste = metodos.fatoracaoLuNormal();
     return 0;

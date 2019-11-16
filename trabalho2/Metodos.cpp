@@ -73,7 +73,6 @@ void Metodos::iniciarMatrizU() {
 }
 
 vector<float> Metodos::fatoracaoLuNormal() {
-    
     int iteracao = 0;
     float pivo;
     float multiplicador;
@@ -91,6 +90,7 @@ vector<float> Metodos::fatoracaoLuNormal() {
     //LY = b
     vector<float> y(this->getTam());
     y = solucionarSistemaInferior(this->matrizL,this->f);
+
     //Ux=y
     vector<float> x(this->getTam());
     x = solucionarSistemaSuperior(this->matrizU, y);
@@ -107,8 +107,9 @@ vector<float> Metodos::pivoteamento(vector<float> linhaPivo, vector<float> linha
 
 vector<float> Metodos::solucionarSistemaInferior(vector<vector<float>> matriz, vector<float> f) {
     vector<float> x(matriz.size());
-    float controlador = 0;
+    float controlador;
     for(int i=0;i<x.size();i++) {
+        controlador = 0;
         for(int j=0; j<i; j++) {
             if(matriz[i][j] != 0) {
                 controlador = controlador + matriz[i][j]*x[j];  
@@ -121,15 +122,16 @@ vector<float> Metodos::solucionarSistemaInferior(vector<vector<float>> matriz, v
 
 vector<float> Metodos::solucionarSistemaSuperior(vector<vector<float>> matriz, vector<float> f) {
     vector<float> x(matriz.size());
-    float controlador = 0;
+    float controlador;
     for(int i=x.size()-1; i>=0; i--) {
+        controlador=0;
         for(int j=x.size()-1; j>i; j--) {
             if(matriz[i][j] != 0) {
                 controlador = controlador + matriz[i][j]*x[j];  
             }
-            x[i] = (f[i]-controlador)/matriz[i][i];
         }
-    } 
+        x[i] = (f[i]-controlador)/matriz[i][i];
+    }
     return x;
 }
 
