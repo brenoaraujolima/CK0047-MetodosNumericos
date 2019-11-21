@@ -94,6 +94,10 @@ vector<float> Metodos::fatoracaoLuNormal() {
     //Ux=y
     vector<float> x(this->getTam());
     x = solucionarSistemaSuperior(this->matrizU, y);
+
+    for(int i=0; i<x.size(); i++) {
+        x[i] = abs(x[i]);
+    }
     printarVetor(x);
     return x;
 }
