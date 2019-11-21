@@ -30,6 +30,7 @@ class Metodos {
     vector<float> solucionarSistemaSuperior(vector<vector<float>> matrizU, vector<float> f);
     void iniciarMatrizD(vector<vector<float>> matrizU);
     void iniciarMatrizP(vector<vector<float>> matrizU);
+    vector<vector<float>> getMatrizU();
     vector<vector<float>> getMatrizL();
     vector<vector<float>> getMatrizD();
     vector<vector<float>> getMatrizP();
@@ -50,6 +51,24 @@ void Metodos::setA(vector<vector<float>> matriz) {
 vector<vector<float>> Metodos::getA() {
     return this->A;
 }
+
+vector<vector<float>> Metodos::getMatrizL() {
+    return this->matrizL;
+}
+
+vector<vector<float>> Metodos::getMatrizU() {
+    return this->matrizU;
+}
+
+vector<vector<float>> Metodos::getMatrizD() {
+    return this->matrizD;
+}
+
+vector<vector<float>> Metodos::getMatrizP() {
+    return this->matrizP;
+}
+
+
 
 void Metodos::setTam(int tam) {
     this->tam = tam;
@@ -163,15 +182,15 @@ void Metodos::printarMatriz(vector<vector<float>> matriz) {
 /******************* Inicio FatoracaoLDP *****************************/
 
 void Metodos::iniciarMatrizD(vector<vector<float>> matrizU) {
-    int n = this->matrizU.size();
-    matrizD.resize(n);
-    for(int i=0; i<n; i++) {
-        matrizD.resize(n);
-        for(int j=0; j<n; j++) {
-            matrizD[i][j] = 0;
+    this->matrizD = matrizU;
+    for(int i=0; i<matrizD.size(); i++) {
+        for(int j=0; j<matrizD.size(); j++) {
+            if(i==j)
+                matrizD[i][j] = matrizU[i][j];
+            else
+                matrizD[i][j] = 0;
         }
     }
-    printarMatriz(matrizD);
 }
 
 void Metodos::iniciarMatrizP(vector<vector<float>> matrizU) {
@@ -184,14 +203,17 @@ void Metodos::iniciarMatrizP(vector<vector<float>> matrizU) {
 }
 
 vector<float> Metodos::fatoracaoLDP() {
-    iniciarMatrizD(this->matrizD);
-    //printarMatriz(this->matrizD);
+    iniciarMatrizD(this->matrizU);
+    iniciarMatrizP(this->matrizU);
 
     vector<float> z = solucionarSistemaInferior(this->matrizL,this->f);
-    /*vector<float> y = solucionarSistemaSuperior(this->matrizD,z);
-    vector<float> x = solucionarSistemaSuperior(this->matrizP,y);*/
-    //this->printarVetor(x);
-    return z;
+    vector<float> y = solucionarSistemaSuperior(this->matrizD,z);
+    vector<float> x = solucionarSistemaSuperior(this->matrizP,y);
+    for(int i=0; i<x.size(); i++) {
+        x[i] = abs(x[i]);
+    }
+    this->printarVetor(x);
+    return x;
 }
 
 
