@@ -7,9 +7,11 @@ class Metodos {
     protected:
     int tam;                    //Numero de deslocamentos
     vector<vector<float>> A;    //Matriz de coeficientes
-    vector<float> f;            //Vetor de teromos independentes.
+    vector<float> f;            //Vetor de termos independentes.
     vector<vector<float>> matrizL;
     vector<vector<float>> matrizU;
+    vector<vector<float>> matrizD;
+    vector<vector<float>> matrizP;
 
     public:
     Metodos(vector<vector<float>> A, vector<float> f, int tam);
@@ -23,8 +25,14 @@ class Metodos {
     void printarVetor(vector<float> vetor);
     void printarMatriz(vector<vector<float>> matriz);
     vector<float> fatoracaoLuNormal();
+    vector<float> fatoracaoLDP();
     vector<float> solucionarSistemaInferior(vector<vector<float>> matrizL, vector<float> f);
     vector<float> solucionarSistemaSuperior(vector<vector<float>> matrizU, vector<float> f);
+    void iniciarMatrizD(vector<vector<float>> matrizU);
+    void iniciarMatrizP(vector<vector<float>> matrizU);
+    vector<vector<float>> getMatrizL();
+    vector<vector<float>> getMatrizD();
+    vector<vector<float>> getMatrizP();
 };
 
 Metodos::Metodos(vector<vector<float>> A, vector<float> f, int tam) {
@@ -94,11 +102,9 @@ vector<float> Metodos::fatoracaoLuNormal() {
     //Ux=y
     vector<float> x(this->getTam());
     x = solucionarSistemaSuperior(this->matrizU, y);
-
     for(int i=0; i<x.size(); i++) {
         x[i] = abs(x[i]);
     }
-    printarVetor(x);
     return x;
 }
 
@@ -153,3 +159,49 @@ void Metodos::printarMatriz(vector<vector<float>> matriz) {
         cout << endl;
     }
 }
+
+/******************* Inicio FatoracaoLDP *****************************/
+
+void Metodos::iniciarMatrizD(vector<vector<float>> matrizU) {
+    int n = this->matrizU.size();
+    matrizD.resize(n);
+    for(int i=0; i<n; i++) {
+        matrizD.resize(n);
+        for(int j=0; j<n; j++) {
+            matrizD[i][j] = 0;
+        }
+    }
+    printarMatriz(matrizD);
+}
+
+void Metodos::iniciarMatrizP(vector<vector<float>> matrizU) {
+    this->matrizP = matrizU;
+    for(int i=0; i<matrizU.size(); i++) {
+        for(int j=0; j<matrizU.size(); j++) {
+            this->matrizP[i][j] = (matrizU[i][j])/matrizU[i][i];
+        }
+    }
+}
+
+vector<float> Metodos::fatoracaoLDP() {
+    iniciarMatrizD(this->matrizD);
+    //printarMatriz(this->matrizD);
+
+    vector<float> z = solucionarSistemaInferior(this->matrizL,this->f);
+    /*vector<float> y = solucionarSistemaSuperior(this->matrizD,z);
+    vector<float> x = solucionarSistemaSuperior(this->matrizP,y);*/
+    //this->printarVetor(x);
+    return z;
+}
+
+
+
+
+
+
+
+
+
+
+
+
