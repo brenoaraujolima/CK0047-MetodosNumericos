@@ -14,7 +14,7 @@ class Metodos {
     vector<vector<float>> matrizP;
 
     public:
-    Metodos(vector<vector<float>> A, vector<float> f, int tam);
+    
     void setA(vector<vector<float>> matriz);
     vector<vector<float>> getA();
     void setTam(int tam);
@@ -34,11 +34,16 @@ class Metodos {
     vector<vector<float>> getMatrizL();
     vector<vector<float>> getMatrizD();
     vector<vector<float>> getMatrizP();
+    void setF(vector<float> f);
+    Metodos(){
+
+    }
 };
 
-Metodos::Metodos(vector<vector<float>> A, vector<float> f, int tam) {
-    this->A = A;
-    this->f = f;
+void Metodos::setF(vector<float> f){
+    this->f = f;   
+}
+void Metodos::setTam(int tam){
     this->tam = tam;
     iniciarMatrizL();
     iniciarMatrizU();
@@ -68,11 +73,6 @@ vector<vector<float>> Metodos::getMatrizP() {
     return this->matrizP;
 }
 
-
-
-void Metodos::setTam(int tam) {
-    this->tam = tam;
-}
 
 int Metodos::getTam() {
     return this->tam;
@@ -106,6 +106,7 @@ vector<float> Metodos::fatoracaoLuNormal() {
 
     for(int j=0; j<this->getTam(); j++) {
         pivo = matrizU[j][j];
+        cout<<pivo<<endl;
         for(int i=j+1; i<matrizU.size(); i++) {
             multiplicador = matrizU[i][j]/pivo;
             matrizL[i][j] = multiplicador;
@@ -212,18 +213,5 @@ vector<float> Metodos::fatoracaoLDP() {
     for(int i=0; i<x.size(); i++) {
         x[i] = abs(x[i]);
     }
-    this->printarVetor(x);
     return x;
 }
-
-
-
-
-
-
-
-
-
-
-
-
