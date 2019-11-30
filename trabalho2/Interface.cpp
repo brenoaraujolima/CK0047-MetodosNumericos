@@ -22,6 +22,7 @@ class Interface {
     void menu();
     void dadosSaida(vector<float> &vetorResposta);
     void respostaLDP(vector<float> &vetorResposta);
+    void conclusaoFinal(bool decisao); 
   //  void printparametros(int foguetes, int iteracoes, float E, float casasdecimais, bool AoT);
     void menuInicial(vector<vector<float>> &minhamatriz, vector<float> &independente, int *n);
     //void loopParametros(int *foguetes, int *iteracoes, float *E, float *casasdecimais, bool *AoT, vector<Metodos>& vetor_metodos);
@@ -213,6 +214,19 @@ class Interface {
             cout << vetorResposta[i] << ", ";
         }
         cout << "}" << endl;
+    }
+
+    void Interface::conclusaoFinal(bool decisao) {
+        cout << endl;
+        inicioCarro();
+        cout << "\t  ";
+        if(decisao == true) {
+            cout << "O foguete cairá." << endl;
+        }
+        else {
+            cout << "O foguete nao caira" << endl;
+        }
+
     }
 
 /*

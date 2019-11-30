@@ -8,6 +8,7 @@ class Metodos {
     int tam;                    //Numero de deslocamentos
     vector<vector<float>> A;    //Matriz de coeficientes
     vector<float> f;            //Vetor de termos independentes.
+    vector<float> solucao;
     vector<vector<float>> matrizL;
     vector<vector<float>> matrizU;
     vector<vector<float>> matrizD;
@@ -35,6 +36,7 @@ class Metodos {
     vector<vector<float>> getMatrizD();
     vector<vector<float>> getMatrizP();
     void setF(vector<float> f);
+    bool conclusao();
     Metodos(){
 
     }
@@ -124,6 +126,7 @@ vector<float> Metodos::fatoracaoLuNormal() {
     for(int i=0; i<x.size(); i++) {
         x[i] = abs(x[i]);
     }
+    solucao = x;
     return x;
 }
 
@@ -212,5 +215,14 @@ vector<float> Metodos::fatoracaoLDP() {
     for(int i=0; i<x.size(); i++) {
         x[i] = abs(x[i]);
     }
+    solucao = x;
     return x;
+}
+
+bool Metodos::conclusao() {
+    for(int i=0; i<solucao.size(); i++) {
+        if(solucao[i] > 2)
+            return true;
+    }
+    return false;
 }

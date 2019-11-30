@@ -34,16 +34,18 @@ int main() {
             //metodos.printarVetor(resposta);
             resposta = metodos.fatoracaoLDP();
             interface.respostaLDP(resposta);
+            interface.conclusaoFinal(metodos.conclusao());
             //metodos.printarVetor(resposta);
             decisao = 0;
             //vetor_metodos[0].setGravaDados(foguetes, iteracoes);
-            cout<<"Os dados foram calculados! tecle 2 para mostrar os dados"<<endl;
+            interface.inicioCarro();
+            cout << "\t  ";
+            cout<<"Os dados foram calculados! tecle 2 para detalhes de implementação"<<endl;
             break;
         case 2:
             // opcao para mostrar as tabelas com os dados calculados
             // monta tela inicial
             interface.header();
-            interface.menu();
             //interface.printparametros(foguetes, iteracoes, E, casasdecimais, AoT);
             cout<<endl<<endl;
             //interface.mostradados(vetor_metodos, foguetes, casasdecimais);
