@@ -20,6 +20,8 @@ class Interface {
     void header();
     void descricao();
     void menu();
+    void dadosSaida(vector<float> &vetorResposta);
+    void respostaLDP(vector<float> &vetorResposta);
   //  void printparametros(int foguetes, int iteracoes, float E, float casasdecimais, bool AoT);
     void menuInicial(vector<vector<float>> &minhamatriz, vector<float> &independente, int *n);
     //void loopParametros(int *foguetes, int *iteracoes, float *E, float *casasdecimais, bool *AoT, vector<Metodos>& vetor_metodos);
@@ -162,30 +164,57 @@ class Interface {
         cout<<"\r\t\tInsira o nº de linhas da matriz:  ";
         resetarFonte();
         cin >> *n;
+        float valor;
         minhamatriz.resize(*n);
         independente.resize(*n);
         for(int i = 0; i<*n; i++){
-            for (int j = 0; j<*n; j++){
-                float n;
+            minhamatriz[i].resize(*n);
+;            for (int j = 0; j<*n; j++) {
                 cout<<"\r\t\tDados da matriz linha "<< i <<" coluna "<<j<<":  ";
-                cin>>n;
+                cin >> valor;
                 
-                minhamatriz[i].push_back(n);
+                minhamatriz[i][j] = valor;
                 
             }
            
         }
-        
+        float valor2;
         for(int i = 0; i<*n; i++){
             cout<<"\r\t\tDados do vetor intependente, coluna "<<i<<":  ";
-            float n;
-            cin >> n;
-            independente.push_back(n);
+            cin >> valor2;
+            independente[i] = valor2;
         }
         inicioCarro();
         fonteVerde();
         
     }
+
+    void Interface::dadosSaida(vector<float> &vetorResposta) {
+        cout << endl;
+        inicioCarro();
+        cout <<"════════════════════════════════ Dados de saída ══════════════════════════════════" << endl;
+        int n = vetorResposta.size();
+        resetarFonte();
+        inicioCarro();
+        cout << "\t  ";
+        cout << "Fatoracao LU Normal:   d = { ";
+        for(int i=0; i<n; i++) {
+            cout << vetorResposta[i] << ", ";
+        }
+        cout << "}" << endl;
+    }
+
+    void Interface::respostaLDP(vector<float> &vetorResposta) {
+        inicioCarro();
+        cout << "\t  ";
+        int n = vetorResposta.size();
+        cout << "Fatoracao LDP:   d = { ";
+        for(int i=0; i<n; i++) {
+            cout << vetorResposta[i] << ", ";
+        }
+        cout << "}" << endl;
+    }
+
 /*
     void loopParametros(int *foguetes, int *iteracoes, float *E, float *casasdecimais, bool *AoT, vector<Metodos>& vetor_metodos) {
         // para cada foguete, instaciamos uma classe com os métodos e armazenamos no vetor

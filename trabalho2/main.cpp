@@ -28,12 +28,14 @@ int main() {
             metodos.setA(minhamatriz);
             metodos.setF(independente);
             metodos.setTam(n);
-            metodos.printarMatriz(minhamatriz);
+            //metodos.printarMatriz(minhamatriz);
             resposta = metodos.fatoracaoLuNormal();
-            metodos.printarVetor(resposta);
+            interface.dadosSaida(resposta);
+            //metodos.printarVetor(resposta);
             resposta = metodos.fatoracaoLDP();
-            metodos.printarVetor(resposta);
-           
+            interface.respostaLDP(resposta);
+            //metodos.printarVetor(resposta);
+            decisao = 0;
             //vetor_metodos[0].setGravaDados(foguetes, iteracoes);
             cout<<"Os dados foram calculados! tecle 2 para mostrar os dados"<<endl;
             break;

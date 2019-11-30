@@ -106,7 +106,6 @@ vector<float> Metodos::fatoracaoLuNormal() {
 
     for(int j=0; j<this->getTam(); j++) {
         pivo = matrizU[j][j];
-        cout<<pivo<<endl;
         for(int i=j+1; i<matrizU.size(); i++) {
             multiplicador = matrizU[i][j]/pivo;
             matrizL[i][j] = multiplicador;
