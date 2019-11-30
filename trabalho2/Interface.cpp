@@ -24,7 +24,9 @@ class Interface {
     void respostaLDP(vector<float> &vetorResposta);
     void conclusaoFinal(bool decisao);
     void detalhes(vector<vector<float>> matrizA, vector<vector<float>> &matrizL, vector<vector<float>> matrizU, vector<vector<float>> matrizD, vector<vector<float>> matrizP); 
-    void matrizPrint(vector<vector<float>> &matriz);
+    void matrizPrint(vector<vector<float>> matriz);
+   
+
   //  void printparametros(int foguetes, int iteracoes, float E, float casasdecimais, bool AoT);
     void menuInicial(vector<vector<float>> &minhamatriz, vector<float> &independente, int *n);
     //void loopParametros(int *foguetes, int *iteracoes, float *E, float *casasdecimais, bool *AoT, vector<Metodos>& vetor_metodos);
@@ -238,59 +240,66 @@ class Interface {
         inicioCarro();
         cout << "\t ";
         cout << "1) ********* Matriz L *********" << endl;
-        for(int i=0; i<matrizL.size(); i++) {
-            for(int j=0;j<matrizL.size();j++) {
-                inicioCarro();
-                cout << "\t   "<< "matrizL ["<<i<<"]["<<j<<"]"<< " = " << matrizL[i][j]<<endl;
-            }
-        }
-        
+        matrizPrint(matrizL);
         inicioCarro();
         cout << "\t ";
         cout << "2) ********* Matriz U *********" << endl;
-        for(int i=0; i<matrizU.size(); i++) {
-            for(int j=0;j<matrizU.size();j++) {
-                inicioCarro();
-                cout << "\t   "<< "matrizU ["<<i<<"]["<<j<<"]"<< " = " << matrizU[i][j]<<endl;
-            }
-        }
+        matrizPrint(matrizU);
         fonteVerde();
         inicioCarro();
         cout <<"════════════════════════════════ Matrizes da fatoracao LDP ══════════════════════════════" << endl;
         resetarFonte();
-
         inicioCarro();
         cout << "\t ";
         cout << "1) ********* Matriz L *********" << endl;
-        for(int i=0; i<matrizL.size(); i++) {
-            for(int j=0;j<matrizL.size();j++) {
-                inicioCarro();
-                cout << "\t   "<< "matrizL ["<<i<<"]["<<j<<"]"<< " = " << matrizL[i][j]<<endl;
-            }
-        }
-
+        matrizPrint(matrizL);
         inicioCarro();
         cout << "\t ";
         cout << "2) ********* Matriz D *********" << endl;
-        for(int i=0; i<matrizD.size(); i++) {
-            for(int j=0;j<matrizD.size();j++) {
-                inicioCarro();
-                cout << "\t   "<< "matrizD ["<<i<<"]["<<j<<"]"<< " = " << matrizD[i][j]<<endl;
-            }
-        }
-
+        matrizPrint(matrizD);
         inicioCarro();
         cout << "\t ";
         cout << "3) ********* Matriz P *********" << endl;
-        for(int i=0; i<matrizP.size(); i++) {
-            for(int j=0;j<matrizP.size();j++) {
-                inicioCarro();
-                cout << "\t   "<< "matrizP ["<<i<<"]["<<j<<"]"<< " = " << matrizP[i][j]<<endl;
-            }
-        }
-
-
+        matrizPrint(matrizP);
     }
+void Interface::matrizPrint(vector<vector<float>> matriz) {
+    cout<<setprecision(3)<<fixed; // casas decimais
+    cout << endl;
+    cout << "\t   ╔";
+    for(int l = 0; l < matriz.size() * 15; l++){
+        cout<<"═";
+    }
+    cout<<"╗"<<endl;
+    for(int i=0;i<matriz.size(); i++) {
+       
+        cout << "\t   ║";
+        for(int j=0; j<matriz.size(); j++) {
+            if(j == matriz.size() - 1){
+                cout << matriz[i][j] <<"\t ║\t";
+                
+            }else{
+                cout << matriz[i][j] <<"\t║\t";
+            }
+            
+            
+        }
+        cout << endl;
+        if(i<matriz.size() - 1){
+            cout << "\t   ║";
+            for(int l = 0; l < matriz.size() * 15; l++){
+                cout<<"═"; // ate penultima linha
+            }
+            cout<<"║"<<endl;    
+        }
+     
+    }
+
+    cout << "\t   ╚";
+    for(int l = 0; l < matriz.size() * 15; l++){
+        cout<<"═";
+    }
+    cout<<"╝"<<endl;
+}
 /*
     void loopParametros(int *foguetes, int *iteracoes, float *E, float *casasdecimais, bool *AoT, vector<Metodos>& vetor_metodos) {
         // para cada foguete, instaciamos uma classe com os métodos e armazenamos no vetor
