@@ -18,7 +18,7 @@ int main() {
     vector<vector<float>> matrizD;
     vector<vector<float>> matrizP;
     int decisao = 1;
-
+    int tmp = 0;
     do {
         switch(decisao)
         {
@@ -29,21 +29,23 @@ int main() {
             interface.header();
             interface.menu();
             interface.descricao();
+            cout<<"\r\t\tTecle 3 para usar valores de benchmark ou 1 para preencher: ";
+            cin >> tmp;
+            if(tmp == 3){
+                decisao = 3;
+                continue;
+            }
             interface.menuInicial(minhamatriz, independente, &n);
             metodos.setA(minhamatriz);
             metodos.setTam(n);
             metodos.setF(independente);
-            //metodos.printarMatriz(minhamatriz);
             resposta = metodos.fatoracaoLuNormal();
             interface.dadosSaida(resposta);
-            //metodos.printarVetor(resposta);
             resposta = metodos.fatoracaoLDP();
             interface.respostaLDP(resposta);
             interface.conclusaoFinal(metodos.conclusao());
-            //metodos.printarVetor(resposta);
             
             decisao = 0;
-            //vetor_metodos[0].setGravaDados(foguetes, iteracoes);
             interface.inicioCarro();
             cout << "\t  ";
             cout<<"Os dados foram calculados! tecle 2 para detalhes de implementação:  ";
@@ -59,6 +61,39 @@ int main() {
             cout << "\t   ";
             cout << "Os detalhes foram mostrados. Tecle 1 para novo cálculo. Tecle 0 para sair: ";
             break;
+        case 3: // benchmark
+            metodos.setBench();
+            resposta = metodos.fatoracaoLuNormal();
+            interface.dadosSaida(resposta);
+            resposta = metodos.fatoracaoLDP();
+            //interface.matrizPrint(metodos.getA);
+            interface.respostaLDP(resposta);
+            interface.conclusaoFinal(metodos.conclusao());
+            decisao = 0;
+            interface.inicioCarro();
+            cout << "\t  ";
+            cout<<"Os dados foram calculados! tecle 2 para detalhes de implementação:  ";
+            break;
+        case 4: // benchmark
+            system("clear");
+            interface.header();
+            interface.menu();
+            interface.descricao();
+            cout<<"\r\t\tporcentagem de ajuste: ";
+            cin >> tmp;
+            metodos.ajuste(tmp);
+            resposta = metodos.fatoracaoLuNormal();
+            interface.dadosSaida(resposta);
+            resposta = metodos.fatoracaoLDP();
+            interface.respostaLDP(resposta);
+            interface.conclusaoFinal(metodos.conclusao());
+            
+            decisao = 0;
+            interface.inicioCarro();
+            cout << "\t  ";
+            cout<<"Os dados foram calculados! tecle 2 para detalhes de implementação:  ";
+            break;
+            
         default:    
             // mesmo que a opcao "1", fica como padrao
             // monta tela inicial

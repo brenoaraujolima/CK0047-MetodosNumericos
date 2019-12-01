@@ -14,8 +14,18 @@ class Metodos {
     vector<vector<float>> matrizD;
     vector<vector<float>> matrizP;
 
+    // para benchmark
+    vector<vector<float>> bench = {
+        {3, -2, 1},
+        {1, -3, 4},
+        {9, 4, -5}
+    };
+    vector<float> benchIndependente = {
+        8, 6, 11
+    };
     public:
-    
+    void setBench();
+    void ajuste(float porcento);    
     void setA(vector<vector<float>> matriz);
     vector<vector<float>> getA();
     void setTam(int tam);
@@ -42,8 +52,21 @@ class Metodos {
     }
 };
 
+void Metodos::ajuste(float porcento){
+    for(int i = 0; i<this->A.size(); i++){
+        for(int j = 0; j<this->A.size(); j++){
+            this->A[i][j] = this->bench[i][j] +  (this->bench[i][j] * (porcento / 100));
+        }
+    }
+    setTam(A.size());
+}
 void Metodos::setF(vector<float> f){
     this->f = f;   
+}
+void Metodos::setBench(){
+    this->f = this->benchIndependente;
+    this->A = this->bench;
+    setTam(this->A.size());
 }
 void Metodos::setTam(int tam){
     this->tam = tam;
@@ -53,6 +76,7 @@ void Metodos::setTam(int tam){
 
 void Metodos::setA(vector<vector<float>> matriz) {
     this->A = matriz;
+    this->bench = matriz;
 }
 
 vector<vector<float>> Metodos::getA() {
